@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>The dog getter</title>
+        <script>
+            const showImages = (data) => {
+                const elem = document.getElementById("photos");
+                document.getElementById("breed").innerHTML = `Breed: ${data.breed} ${data.subBreed}`;
+                elem.innerHTML = "";
+                console.log(data);
+                data.images.forEach(url => {
+                        elem.innerHTML += `<img src='${url}' width="200px" heigth="200px">`
+                    })
+            }
+            const getDogPhotos = () => {
+                fetch('http://localhost:3000/dogs').then(resp => resp.json()).then(showImages)
+            }
+        </script>
+    </head>
+    <bodY>
+        <div>
+            <a href="http://localhost:3000/home">Home</a>
+            <a href="http://localhost:3000/metrics">Metrics</a>
+        </div>
+        <h1>The dog random generator</h1>
+        <button onclick="getDogPhotos()">Get Images</button>
+        <p id="breed"></p>
+        <div id="photos"></div>
+    </bodY>
+</html>
