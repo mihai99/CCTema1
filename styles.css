@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+}
+.header {
+    padding: 20px;
+    background: grey;
+}
+.header a {
+    padding: 12px 20px;
+    background: aliceblue;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.2s all ease-in;
+}
+.header a:hover {
+    background: #7fc3ff;
+}
+#title {
+    font-size: 24px;
+    text-align: center;
+    background: aliceblue;
+    margin: 0;
+    padding: 20;
+    font-weight: 900;
+}
+.header button {
+    float: right;
+    padding: 12px;
+    margin-top: -12px;
+}
+.metrics-container {
+    display: flex;
+}
+p.metrics {
+    padding: 40px;
+    background: bisque;
+    width: 200px;
+    margin: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+#breed {
+    margin: 0px;
+    padding: 16px;
+    text-align: center;
+    font-size: large;
+    background: aquamarine;
+}
+#photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

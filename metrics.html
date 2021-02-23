@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="http://localhost:3000/styles.css">
+        <script>
+            const getMetricsData = () => {
+                fetch('http://localhost:3000/get-metrics-data').then(r => r.json()).then(response => {
+                    console.log(response);
+                    const totalRequests = response.length;
+                    const totalLatency = response.map(x => x.latency).reduce((p, c) => p+c, 0);
+                    const totalPhotosGot = response
+                    .filter(x => x.request === "random api")
+                    .map(x => JSON.parse(x.response))
+                    .map(x => x.random.data[0])
+                    .reduce((p, c) => p+c, 0);
+
+                    console.log(totalPhotosGot);
+                    const allBreedsGot = response
+                    .filter(x => x.request.indexOf('https://dog.ceo/api/breed/') !== -1)
+                    .map(x => x.request)
+                    .map(x => x.split('/')[5]);
+                    document.getElementById('totalRequests').innerHTML=`Total reqeust number: ${totalRequests}`
+                    document.getElementById('totalLatency').innerHTML=`Total latency: ${totalRequests}`
+                    document.getElementById('allBreedsGot').innerHTML=`All breeds viewed: ${allBreedsGot.join(', ')}`
+                    document.getElementById('allphotos').innerHTML=`Number of photos viewed: ${totalPhotosGot}`
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="http://localhost:3000/home">Home</a>
+            <a href="http://localhost:3000/metrics">Metrics</a>
+        </div>
+        <p id="title">Metrics:</p>
+        <div class="metrics-container">
+            <p id="totalRequests" class="metrics"></p>
+            <p id="totalLatency" class="metrics"></p>
+            <p id="allBreedsGot" class="metrics"></p>
+            <p id="allphotos" class="metrics"></p>
+        </div>
+        <script>
+            getMetricsData();
+        </script>
+    </body>
+</html>
