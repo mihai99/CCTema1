@@ -19,7 +19,7 @@
                     .map(x => x.request)
                     .map(x => x.split('/')[5]);
                     document.getElementById('totalRequests').innerHTML=`Total reqeust number: ${totalRequests}`
-                    document.getElementById('totalLatency').innerHTML=`Total latency: ${totalRequests}`
+                    document.getElementById('totalLatency').innerHTML=`Total latency: ${totalLatency}`
                     document.getElementById('allBreedsGot').innerHTML=`All breeds viewed: ${allBreedsGot.join(', ')}`
                     document.getElementById('allphotos').innerHTML=`Number of photos viewed: ${totalPhotosGot}`
                 })
