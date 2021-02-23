@@ -18,8 +18,9 @@
         }
         let requestNumber = 0;
         const test = async () => {
-            const batchesNumber= 5;
-            const requestsPerBatch = 2;
+            const batchesNumber= Number(document.getElementById("noOfBatches").value) || 5;
+            const requestsPerBatch = Number(document.getElementById("noOfRequests").value) || 2;
+            console.log(Number(document.getElementById("noOfBatches").value), Number(document.getElementById("noOfRequests").value) );
             const parent = document.getElementById("analythics");
             parent.innerHTML = "";
             console.log(parent);
@@ -46,6 +47,10 @@
         <a href="http://localhost:3000/metrics">Metrics</a>
         <button onclick="getDogPhotos()">Get Images</button>
         <button onclick="test()">test</button>
+        <span>Nr of natches</span>
+        <input type="number" id="noOfBatches">
+        <span>Nr of requests</span>
+        <input type="number" id="noOfRequests">
     </div>
     <p id="title">The dog random generator</p>
     <p id="breed"></p>

@@ -50,7 +50,6 @@ const server = http.createServer(async (req, res) => {
       res.end(JSON.stringify(currentLogs));
       break;
     case 'dogs':
-      console.log("aici8");
       const logs = [];
       const now = Date.now();
       const randomNumberResult = await random.generateIntegers({ min: 1, max: 10, n: 1 });
