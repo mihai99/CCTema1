@@ -19,7 +19,8 @@
                     .map(x => x.request)
                     .map(x => x.split('/')[5]);
                     document.getElementById('totalRequests').innerHTML=`Total reqeust number: ${totalRequests}`
-                    document.getElementById('totalLatency').innerHTML=`Total latency: ${totalLatency}`
+                    document.getElementById('totalLatency').innerHTML=`Total latency: ${totalLatency}ms`
+                    document.getElementById('mediumLatency').innerHTML=`Medium latency: ${totalLatency/totalRequests}ms`
                     document.getElementById('allBreedsGot').innerHTML=`All breeds viewed: ${allBreedsGot.join(', ')}`
                     document.getElementById('allphotos').innerHTML=`Number of photos viewed: ${totalPhotosGot}`
                 })
@@ -35,6 +36,7 @@
         <div class="metrics-container">
             <p id="totalRequests" class="metrics"></p>
             <p id="totalLatency" class="metrics"></p>
+            <p id="mediumLatency" class="metrics"></p>
             <p id="allBreedsGot" class="metrics"></p>
             <p id="allphotos" class="metrics"></p>
         </div>
