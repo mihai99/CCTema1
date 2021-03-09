@@ -33,8 +33,6 @@ const createArticle = async (res, req) => {
 
 
 const getArticle = async (res, req) => {
-    console.log("get article");
-    console.log(req.queryParams);
     const connection = await dbConnection.connect();
     const query = { _id: ObjectId(req.queryParams.bookId) };
     connection.collection('books').findOne(query, function (err, result) {

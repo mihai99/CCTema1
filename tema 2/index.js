@@ -27,7 +27,6 @@ const server = http.createServer((req, res) => {
             if (route.url === requestObject.url && route.method === requestObject.method && !sent) {
                 sent = true;
                 if(route.requiredQueryParams && !utils.checkRouteParams(route.requiredQueryParams, requestObject.queryParams)) {
-                    console.log("bad query params");
                     res.statusCode = 400;
                     res.setHeader('Content-Type', 'text/plain');
                     res.end(`Bad request - missing query params`);
