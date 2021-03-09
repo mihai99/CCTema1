@@ -42,13 +42,17 @@ const updateBook = async (res, req) => {
     if (req.body.releaseDate && !Date.parse(req.body.releaseDate)) {
         throw new erros.BadRequestError("Wrong date format")
     } else {
+        if (!req.body.name || !req.body.authorName || !req.body.genere || !Date.parse(req.body.releaseDate)) {
+            throw new erros.BadRequestError('Wrong fields or field types');
+        }
         const connection = await dbConnection.connect();
         const query = { _id: ObjectId(req.queryParams.id) };
-        const newValues = { $set: {} }
-        if (req.body.name) { newValues.$set.name = req.body.name; }
-        if (req.body.releaseDate) { newValues.$set.releaseDate = Date.parse(req.body.releaseDate); }
-        if (req.body.authorName) { newValues.$set.authorName = req.body.authorName; }
-        if (req.body.genere) { newValues.$set.genere = req.body.genere; }
+        const newValues = { $set: {
+            name: req.body.name,
+            releaseDate: Date.parse(req.body.releaseDate),
+            authorName: req.body.authorName,
+            genere: req.body.genere,
+        } }
         connection.collection('books').updateOne(query, newValues, function (err, response) {
             if (err) {
                 throw new erros.InternalServerError('cound not update the book');

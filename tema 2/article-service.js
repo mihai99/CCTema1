@@ -66,12 +66,16 @@ const deleteArticle = async (res, req) => {
 }
 
 const updateArticle = async (res, req) => {
+    if (!req.body.title || !req.body.content || !req.body.pages) {
+        throw new erros.BadRequestError('Wrong fields or field types');
+    }
     const connection = await dbConnection.connect();
     const query = { _id: ObjectId(req.queryParams.bookId), "articles._id": ObjectId(req.queryParams.articleId) };
-    const newValues = { $set: { "articles.$.title": "test" } }
-    if (req.body.title) { newValues.$set["articles.$.title"] = req.body.title; }
-    if (req.body.content) { newValues.$set["articles.$.content"] = req.body.content }
-    if (req.body.pages) { newValues.$set["articles.$.pages"] = req.body.pages; }
+    const newValues = { $set: { 
+        "articles.$.title": req.body.title,
+        "articles.$.content": req.body.content,
+        "articles.$.pages": req.body.pages,
+     } }
     connection.collection('books').updateOne(query, newValues, function (err, response) {
         if (err) {
             throw new erros.InternalServerError('cound not update the article');
