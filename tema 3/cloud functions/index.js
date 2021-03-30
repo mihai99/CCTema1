@@ -1,5 +1,5 @@
-const Datastore = require('@google-cloud/datastore');
 const uuid = require('uuid');
+const Datastore = require('@google-cloud/datastore');
 
 const datastore = new Datastore({
 	projectId: 'tema3final',
@@ -17,10 +17,11 @@ exports.mapPoints = async (req, res) => {
 			  res.status(200).json(JSON.stringify(points));
 		  break;
 		case 'POST':
-			console.info(req.body);
-			const lng = req.body.lng;
-			const lat = req.body.lat;
-			const message = req.body.message;
+			const lng =JSON.parse(req.body).lng
+			const lat = JSON.parse(req.body).lat;
+			const message = JSON.parse(req.body).message;
+			console.warn("body >>>", req.body, "lat", JSON.parse(req.body).lat, "var>>", lat, "lng", lng, "mess", message);
+			console.warn(lng, lat, message);
 			if(!lat || !lng || !message) {
 				res.status(400).send({error: 'Bad reques'});
 				return;
